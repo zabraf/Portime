@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMouvement : MonoBehaviour
+public class PlayerMouvement : Recorder
 {
     // Start is called before the first frame update
     private CharacterController controller;
@@ -17,20 +17,24 @@ public class PlayerMouvement : MonoBehaviour
     private Vector3 velocity;
 
     public Transform groundCheck;
-    public float groundDIstance = 0.3f;
+    public float groundDistance = 0.3f;
     public LayerMask groundMask;
 
     private bool isGrounded;
-    
+
+    public GameObject Clone;
     void Start()
     {
         controller = GetComponent<CharacterController>();
     }
-
+    private void FixedUpdate()
+    {
+        Record();
+    }
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDIstance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         x = Input.GetAxis("Horizontal");
         z = Input.GetAxis("Vertical");
         if (isGrounded && velocity.y < 0)
@@ -48,5 +52,21 @@ public class PlayerMouvement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            StopRecord();
+        }
+    }
+
+    public override void StopRecord()
+    {
+        transform.position = pointInTimes[0].postion;
+        transform.rotation = pointInTimes[0].rotation;
+
+        GameObject instance = Instantiate(Clone);
+        instance.GetComponent<Player>().SetPointInTime(pointInTimes);
+        instance.transform.position = pointInTimes[0].postion;
+        instance.transform.rotation = pointInTimes[0].rotation;
+        pointInTimes = new List<PointInTime>();
     }
 }
