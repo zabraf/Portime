@@ -23,9 +23,12 @@ public class PlayerMouvement : Recorder
     private bool isGrounded;
 
     public GameObject Clone;
+
+    private bool hasTeleported;
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        hasTeleported = false;
     }
     private void FixedUpdate()
     {
@@ -43,30 +46,35 @@ public class PlayerMouvement : Recorder
         }
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+
         controller.Move(move * speed * Time.deltaTime);
-        
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        if (Input.GetKeyUp(KeyCode.Return))
-        {
-            StopRecord();
-        }
+
+
     }
 
     public override void StopRecord()
     {
+        controller.enabled = false;
         transform.position = pointInTimes[0].postion;
         transform.rotation = pointInTimes[0].rotation;
-
+        controller.enabled = true;
         GameObject instance = Instantiate(Clone);
         instance.GetComponent<Player>().SetPointInTime(pointInTimes);
         instance.transform.position = pointInTimes[0].postion;
         instance.transform.rotation = pointInTimes[0].rotation;
         pointInTimes = new List<PointInTime>();
+
+    }
+
+    protected override void Record()
+    {
+        pointInTimes.Add(new PointInTime(transform.position, transform.rotation));
     }
 }

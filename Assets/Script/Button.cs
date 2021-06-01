@@ -7,7 +7,7 @@ public class Button : MonoBehaviour
     // Start is called before the first frame update
     private Material material;
     private int numberOfElement;
-    public Activable activable;
+    public List<Activable> activables;
     void Start()
     {
         material = GetComponent<Renderer>().material;
@@ -17,7 +17,10 @@ public class Button : MonoBehaviour
     {
         if(collision.tag == "Player" || collision.tag == "Cube" || collision.tag == "Clone")
         {
-            activable.Activate();
+            foreach (Activable activable in activables)
+            {
+                activable.Activate();
+            }
             material.color = Color.green;
             numberOfElement++;
         }
@@ -30,8 +33,11 @@ public class Button : MonoBehaviour
             
             numberOfElement--;
             if (numberOfElement == 0)
-            { 
-                activable.Deactivate();
+            {
+                foreach (Activable activable in activables)
+                {
+                    activable.Deactivate();
+                }
                 material.color = Color.black;
             }
 

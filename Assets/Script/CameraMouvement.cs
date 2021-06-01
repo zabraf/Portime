@@ -34,9 +34,10 @@ public class CameraMouvement : MonoBehaviour
             cube = hit.transform.gameObject;
             if (cube.gameObject.tag != "Cube")
                 cube = null;
-            if (cube != null)
-                
-                    cube.GetComponent<Rigidbody>().isKinematic = true;
+            if (cube != null) { 
+                cube.GetComponent<Rigidbody>().isKinematic = true;
+                cube.GetComponent<CubeController>().isRecorded = false;
+            }
         }
         else if(Input.GetMouseButtonUp(0)){
             if(cube != null)

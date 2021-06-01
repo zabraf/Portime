@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
 
         if (index >= pointInTimes.Count - 1)
         {
-
             index = 0;
         }
         else
