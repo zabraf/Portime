@@ -16,30 +16,40 @@ public class GameController : MonoBehaviour
 
     public TextMeshProUGUI time;
     public TextMeshProUGUI clones;
+    public TextMeshProUGUI Gameover;
     void Start()
     {
+        Time.timeScale = 1;
         time.text = string.Format("{0:N2}", startingTime);
-        clones.text = numberofClone.ToString() + "/" + totalNumberofClone.ToString();
+        clones.text = "clones : " + numberofClone.ToString() + "/" + totalNumberofClone.ToString();
         currentTime = startingTime;
         recorders = Object.FindObjectsOfType<Recorder>();
-
-
     }
-
+    public void NextLevel()
+    {
+        int level = SceneManager.GetActiveScene().buildIndex + 1;
+        PlayerPrefs.SetInt("level", level);
+        SceneManager.LoadScene(level);
+    }
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene(0);
+        }
+
         if (Input.GetKeyUp(KeyCode.Return))
         {
-            Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
         if (currentTime <= 0)
         {
             if (numberofClone >= totalNumberofClone)
             {
-                Time.timeScale = 0;
-                time.text = "Press ENTER to restart";
+                Gameover.text = "This puzzle is now impossible in this timeline,\n press ENTER key to create a new timeline.";
+                Time.timeScale = 0; 
             }
             else
             {
@@ -48,7 +58,7 @@ public class GameController : MonoBehaviour
                 {
                     recorder.StopRecord();
                 }
-                clones.text = numberofClone.ToString() + "/" + totalNumberofClone.ToString();
+                clones.text = "clones : " + numberofClone.ToString() + "/" + totalNumberofClone.ToString();
                 currentTime = startingTime;
             }
         }

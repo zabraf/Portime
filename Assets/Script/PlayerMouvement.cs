@@ -25,11 +25,9 @@ public class PlayerMouvement : Recorder
     public GameObject Clone;
     public CameraMouvement camera;
 
-    private bool hasTeleported;
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        hasTeleported = false;
     }
     private void FixedUpdate()
     {
@@ -69,8 +67,6 @@ public class PlayerMouvement : Recorder
         controller.enabled = true;
         GameObject instance = Instantiate(Clone);
         instance.GetComponent<Player>().SetPointInTime(pointInTimes);
-        instance.transform.position = pointInTimes[0].postion;
-        instance.transform.rotation = pointInTimes[0].rotation;
         pointInTimes = new List<PointInTime>();
 
     }

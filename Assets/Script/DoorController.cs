@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class DoorController : Activable
 {
+    public bool Resverse = false;
     public override void Activate()
     {
-        this.transform.gameObject.SetActive(false);
+        if (Resverse) { 
+            this.transform.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.transform.gameObject.SetActive(false);
+        }
     }
 
-
-    public override void Deactivate()
+    public override void Desactivate()
     {
-        this.transform.gameObject.SetActive(true);
+        if (Resverse)
+        {
+            this.transform.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.transform.gameObject.SetActive(true);
+        }
     }
-
 }

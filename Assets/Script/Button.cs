@@ -8,9 +8,11 @@ public class Button : MonoBehaviour
     private Material material;
     private int numberOfElement;
     public List<Activable> activables;
+    private Color color;
     void Start()
     {
         material = GetComponent<Renderer>().material;
+        color = material.color;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -21,7 +23,7 @@ public class Button : MonoBehaviour
             {
                 activable.Activate();
             }
-            material.color = Color.green;
+            material.color = Color.red;
             numberOfElement++;
         }
     }
@@ -36,9 +38,9 @@ public class Button : MonoBehaviour
             {
                 foreach (Activable activable in activables)
                 {
-                    activable.Deactivate();
+                    activable.Desactivate();
                 }
-                material.color = Color.black;
+                material.color = color;
             }
 
         }
