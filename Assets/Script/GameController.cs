@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Return))
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         if (currentTime <= 0)

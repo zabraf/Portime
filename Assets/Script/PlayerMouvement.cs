@@ -23,6 +23,7 @@ public class PlayerMouvement : Recorder
     private bool isGrounded;
 
     public GameObject Clone;
+    public CameraMouvement camera;
 
     private bool hasTeleported;
     void Start()
@@ -61,6 +62,7 @@ public class PlayerMouvement : Recorder
 
     public override void StopRecord()
     {
+        camera.DropCube();
         controller.enabled = false;
         transform.position = pointInTimes[0].postion;
         transform.rotation = pointInTimes[0].rotation;

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690792380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.505, z: 2.076}
+  m_LocalPosition: {x: 0, y: 0.17, z: 2.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7126287121746145359}
@@ -129,7 +129,8 @@ MonoBehaviour:
   mouseSensitivity: 100
   player: {fileID: 7126287121746145359}
   grabPose: {fileID: 690792381}
-  velocity: 10
+  velocity: 50
+  rangeCube: 7
 --- !u!1 &7126287121746145354
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,14 +215,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9544568dcc35bf9458f6c5f11427e792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  record: 0
   gravity: -19.62
-  jumpHeight: 3
+  jumpHeight: 1.5
   groundCheck: {fileID: 7126287121866192372}
   groundDistance: 0.3
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   Clone: {fileID: 2119436157412894903, guid: a825b1739315aec4291e76091e2b9abe, type: 3}
+  camera: {fileID: 7126287120850892354}
 --- !u!65 &799197649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -233,8 +236,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: -2, z: 0}
+  m_Size: {x: 1, y: 0.9552202, z: 1}
+  m_Center: {x: 0, y: -1.5163798, z: 0}
 --- !u!1 &7126287121866192375
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +262,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7126287121866192375}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.8260002, z: 0}
+  m_LocalPosition: {x: 0, y: -2.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7126287121746145359}

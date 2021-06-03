@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51dfb1eecd6d4184f9c60512fcb9a628, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 5
-  totalNumberofClone: 3
+  startingTime: 30
+  totalNumberofClone: 2
   time: {fileID: 3455223183602710258}
   clones: {fileID: 3455223182796000014}

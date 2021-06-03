@@ -13,13 +13,22 @@ public class CameraMouvement : MonoBehaviour
     private float mouseX;
     private float mouseY;
     private float xRotation = 0f;
+    public int rangeCube = 7;
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
+    public void DropCube()
+    {
+        if (cube != null)
+        {
+            cube.GetComponent<Rigidbody>().isKinematic = false;
+            cube = null;
+        }
+       
+    }
     // Update is called once per frame
     void Update()
     {
@@ -30,7 +39,7 @@ public class CameraMouvement : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation,-90f, 90f);
         player.Rotate(Vector3.up, mouseX);
         transform.localRotation = Quaternion.Euler(xRotation, 0F, 0F);
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward,out hit,5) && hit.transform.GetComponent<Rigidbody>()){
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(transform.position, transform.forward,out hit,rangeCube) && hit.transform.GetComponent<Rigidbody>()){
             cube = hit.transform.gameObject;
             if (cube.gameObject.tag != "Cube")
                 cube = null;
@@ -39,12 +48,8 @@ public class CameraMouvement : MonoBehaviour
                 cube.GetComponent<CubeController>().isRecorded = false;
             }
         }
-        else if(Input.GetMouseButtonUp(0)){
-            if(cube != null)
-            { 
-                cube.GetComponent<Rigidbody>().isKinematic = false;
-                cube = null;
-            }
+        else if(Input.GetMouseButtonUp(0)){   
+                DropCube();
         }
         if (cube)
         {
