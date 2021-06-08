@@ -9,9 +9,12 @@ public class Button : MonoBehaviour
     private int numberOfElement;
     public List<Activable> activables;
     private Color color;
+    private bool asActivated;
+    private AudioSource audioSource;
     void Start()
     {
         material = GetComponent<Renderer>().material;
+        audioSource = GetComponent<AudioSource>();
         color = material.color;
     }
 
@@ -19,9 +22,14 @@ public class Button : MonoBehaviour
     {
         if(collision.tag == "Player" || collision.tag == "Cube" || collision.tag == "Clone")
         {
-            foreach (Activable activable in activables)
+            if(!asActivated)
             {
-                activable.Activate();
+                audioSource.Play();
+                foreach (Activable activable in activables)
+                {
+                    activable.Activate();
+                }
+                asActivated = true;
             }
             material.color = Color.red;
             numberOfElement++;
@@ -32,7 +40,7 @@ public class Button : MonoBehaviour
         
         if (collision.tag == "Player" || collision.tag == "Cube" || collision.tag == "Clone")
         {
-            
+           
             numberOfElement--;
             if (numberOfElement == 0)
             {
@@ -40,6 +48,7 @@ public class Button : MonoBehaviour
                 {
                     activable.Desactivate();
                 }
+                asActivated = false;
                 material.color = color;
             }
 

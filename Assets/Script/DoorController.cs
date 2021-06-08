@@ -1,25 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DoorController : Activable
 {
     public bool Resverse = false;
     public int nbrActivabe = 1;
-    private int nb;
+    public TextMeshPro textMeshPro;
+    public AudioClip audioClip;
     private void Start()
     {
-        nb = nbrActivabe;
-    }
-    public void Restart()
-    {
-        nb = nbrActivabe;
+        textMeshPro.text = nbrActivabe.ToString();
     }
     public override void Activate()
     {
-        nb--;
-        if(nb == 0)
-        { 
+        nbrActivabe--;
+        textMeshPro.text = nbrActivabe.ToString();
+        if (nbrActivabe == 0)
+        {
+            AudioSource.PlayClipAtPoint(audioClip, transform.position);
             if (Resverse) { 
                 this.transform.gameObject.SetActive(true);
             }
@@ -32,7 +32,7 @@ public class DoorController : Activable
 
     public override void Desactivate()
     {
-        if (nb == 0)
+        if (nbrActivabe == 0)
         {
             if (Resverse)
             {
@@ -43,7 +43,8 @@ public class DoorController : Activable
                 this.transform.gameObject.SetActive(true);
             }
         }
-        nb++;
-       
+        nbrActivabe++;
+        textMeshPro.text = nbrActivabe.ToString();
+
     }
 }
