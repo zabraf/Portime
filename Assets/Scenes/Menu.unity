@@ -903,16 +903,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuMusic
       objectReference: {fileID: 0}
-    - target: {fileID: 2716383919303222261, guid: 5493c966c08a2634e9acd7196d25e545,
-        type: 3}
-      propertyPath: m_Volume
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2716383919303222261, guid: 5493c966c08a2634e9acd7196d25e545,
-        type: 3}
-      propertyPath: BypassReverbZones
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2716383919303222262, guid: 5493c966c08a2634e9acd7196d25e545,
         type: 3}
       propertyPath: m_RootOrder
